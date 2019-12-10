@@ -19,7 +19,7 @@ public class MessageDAO implements DAO<Integer, Message>{
 	@Override
 	public void create(Message e) throws SQLException {
 		
-		String query = "select max(id) from personne";
+		String query = "select max(id) from message";
 		PreparedStatement ps;
 		int id = 0;
 		try {
@@ -35,10 +35,11 @@ public class MessageDAO implements DAO<Integer, Message>{
 		try {
 			ps = DataBaseConnection.getConnection().prepareStatement(query);
 			ps.setInt(1, id);
-			ps.setString(1, e.getName());
-			ps.setString(1, e.getMail());
-			ps.setString(1, e.getSubject());
-			ps.setString(1, e.getMessage());
+			ps.setString(2, e.getName());
+			ps.setString(3, e.getMail());
+			ps.setString(4, e.getSubject());
+			ps.setString(5, e.getMessage());
+			ps.executeUpdate();
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
